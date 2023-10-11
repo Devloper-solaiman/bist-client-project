@@ -1,15 +1,16 @@
-import axios from "axios";
-import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
+import axios from "axios";
 import { useEffect } from "react";
 
+
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000', 
+  baseURL: 'https://bist-server-project.vercel.app',
 });
 
 const useAxiosSecure = () => {
-  const { logOut } = useAuth(); 
-  const navigate = useNavigate(); 
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {

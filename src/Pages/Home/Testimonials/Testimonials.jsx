@@ -15,19 +15,19 @@ import '@smastrom/react-rating/style.css'
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([])
-  useEffect(()=>{
-    fetch('http://localhost:5000/reviews')
-    .then(res => res.json())
-    .then(data => setReviews(data))
-  },[])
-    return (
-        <section  className="my-20">
-              <SectionTitle
-                subHeading="What Our Client Say"
-                heading={'Testimonials'}
-            ></SectionTitle>
+  useEffect(() => {
+    fetch('https://bist-server-project.vercel.app/reviews')
+      .then(res => res.json())
+      .then(data => setReviews(data))
+  }, [])
+  return (
+    <section className="my-20">
+      <SectionTitle
+        subHeading="What Our Client Say"
+        heading={'Testimonials'}
+      ></SectionTitle>
 
-<Swiper
+      <Swiper
         cssMode={true}
         navigation={true}
         pagination={true}
@@ -36,26 +36,26 @@ const Testimonials = () => {
         modules={[Navigation, Pagination, Mousewheel, Keyboard]}
         className="mySwiper"
       >
-       {
-        reviews.map(review =>  <SwiperSlide
-        key={review._id}
-        >
-          <div className="flex flex-col items-center mx-24 my-16">
-            <Rating
-             style={{ maxWidth: 180 }}
-             value={review.rating}
-             readOnly
-            ></Rating>
-           <BiSolidQuoteLeft className="text-8xl text-slate-500"/>
-          <p className="py-8">{review.details}</p>
-          <h3 className="text-2xl text-orange-400">{review.name}</h3>
-          </div>
-        </SwiperSlide>)
-       }
-       
+        {
+          reviews.map(review => <SwiperSlide
+            key={review._id}
+          >
+            <div className="flex flex-col items-center mx-24 my-16">
+              <Rating
+                style={{ maxWidth: 180 }}
+                value={review.rating}
+                readOnly
+              ></Rating>
+              <BiSolidQuoteLeft className="text-8xl text-slate-500" />
+              <p className="py-8">{review.details}</p>
+              <h3 className="text-2xl text-orange-400">{review.name}</h3>
+            </div>
+          </SwiperSlide>)
+        }
+
       </Swiper>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Testimonials;

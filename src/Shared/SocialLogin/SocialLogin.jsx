@@ -16,7 +16,7 @@ const SocialLogin = () => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
                 const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
-                fetch('http://localhost:5000/users', {
+                fetch('https://bist-server-project.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -30,7 +30,7 @@ const SocialLogin = () => {
             })
     }
     return (
-         <div>
+        <div>
             <div className="divider"></div>
             <div className="w-full text-center my-4">
                 <button onClick={handleGoogleSignIn} className="btn btn-circle btn-outline">
