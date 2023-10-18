@@ -1,5 +1,6 @@
-# React + Vite
-
+# React+Vite, mongoDB, vercel
+## live Link: https://bistro-boss-972b4.web.app
+### admin gmail: nill@gmail.com pass: Aa123@
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
