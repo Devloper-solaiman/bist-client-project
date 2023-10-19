@@ -16,7 +16,7 @@ import '@smastrom/react-rating/style.css'
 const Testimonials = () => {
   const [reviews, setReviews] = useState([])
   useEffect(() => {
-    fetch('https://bist-server-project.vercel.app/reviews')
+    fetch('https://bist-server-project-devloper-solaiman.vercel.app/reviews')
       .then(res => res.json())
       .then(data => setReviews(data))
   }, [])

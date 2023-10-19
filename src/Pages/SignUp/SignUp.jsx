@@ -22,7 +22,7 @@ const SignUp = () => {
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email }
-                        fetch('https://bist-server-project.vercel.app/users', {
+                        fetch('https://bist-server-project-devloper-solaiman.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'

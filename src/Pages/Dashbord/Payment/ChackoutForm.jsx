@@ -13,9 +13,6 @@ const ChackoutForm = ({ cart, price }) => {
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
 
-
-
-
     useEffect(() => {
         if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price })

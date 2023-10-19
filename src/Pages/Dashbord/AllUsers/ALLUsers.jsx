@@ -15,7 +15,7 @@ const ALLUsers = () => {
     }
 
     const handleMakeAdmin = user => {
-        fetch(`https://bist-server-project.vercel.app/users/admin/${user._id}`, {
+        fetch(`https://bist-server-project-devloper-solaiman.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

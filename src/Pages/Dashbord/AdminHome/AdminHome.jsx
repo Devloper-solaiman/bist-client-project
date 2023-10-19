@@ -1,16 +1,16 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, ResponsiveContainer, Legend } from 'recharts';
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 const AdminHome = () => {
-    const { user } = useAuth();
+    const { user } = useAuth()
     const [axiosSecure] = useAxiosSecure();
 
     const { data: stats = {} } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
-            const res = await axiosSecure('/admin-stats');
+            const res = await axiosSecure('/admin-stats')
             return res.data;
         }
     })
@@ -18,13 +18,12 @@ const AdminHome = () => {
     const { data: chartData = [] } = useQuery({
         queryKey: ['chart-data'],
         queryFn: async () => {
-            const res = await axiosSecure('/order-stats');
+            const res = await axiosSecure('/order-stats')
             return res.data;
         }
     })
 
     const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
-
     const getPath = (x, y, width, height) => {
         return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}
     ${x + width / 2}, ${y}
@@ -38,6 +37,7 @@ const AdminHome = () => {
         return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
     };
 
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
     const RADIAN = Math.PI / 180;
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -52,9 +52,11 @@ const AdminHome = () => {
     };
 
 
+
     return (
         <div className="w-full m-4">
-            <h2 className="text-3xl">Hi, {user.displayName}</h2>
+            <h2 className="text-3xl">HI, <span className="font-bold text-gray-600"> {user.displayName}</span></h2>
+
             <div className="stats shadow">
 
                 <div className="stat">
@@ -74,13 +76,14 @@ const AdminHome = () => {
                     <div className="stat-value">{stats.users}</div>
                     <div className="stat-desc">↗︎ 400 (22%)</div>
                 </div>
+
                 <div className="stat">
                     <div className="stat-figure text-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
                     </div>
-                    <div className="stat-title">Menu Items</div>
+                    <div className="stat-title">total product Items</div>
                     <div className="stat-value">{stats.products}</div>
-                    <div className="stat-desc">↗︎ 400 (22%)</div>
+                    <div className="stat-desc">↘︎ 90 (14%)</div>
                 </div>
 
                 <div className="stat">
@@ -95,6 +98,7 @@ const AdminHome = () => {
             </div>
             <div className="flex">
                 <div className="w-1/2">
+
                     <BarChart
                         width={500}
                         height={300}
@@ -115,6 +119,7 @@ const AdminHome = () => {
                             ))}
                         </Bar>
                     </BarChart>
+
                 </div>
                 <div className="w-1/2">
                     <ResponsiveContainer width="100%" height="100%">
@@ -128,10 +133,10 @@ const AdminHome = () => {
                                 label={renderCustomizedLabel}
                                 outerRadius={80}
                                 fill="#8884d8"
-                                dataKey="count"
+                                dataKey="total"
                             >
                                 {chartData.map((entry, index) => (
-                                    <Cell name={entry.category} key={`cell-${index}`} fill={colors[index % colors.length]} />
+                                    <Cell name={entry.category} key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
                         </PieChart>
