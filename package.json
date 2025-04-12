@@ -34,7 +34,8 @@
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.7.27",
     "swipe-js-iso": "^2.1.5",
-    "swiper": "^10.2.0"
+    "swiper": "^10.2.0",
+    "vercel": "^41.6.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
