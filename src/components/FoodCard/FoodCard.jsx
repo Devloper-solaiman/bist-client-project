@@ -15,6 +15,7 @@ const FoodCard = ({ item }) => {
     const handleImageLoad = () => {
         setIsLoading(false); 
     };
+    // eslint-disable-next-line no-unused-vars
     const handleAddToCart = item => {
        
         if (user && user.email) {
