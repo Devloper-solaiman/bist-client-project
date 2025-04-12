@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useCart from "../../hooks/useCart";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,10 +11,12 @@ const FoodCard = ({ item }) => {
     const [, refetch] = useCart();
     const navigate = useNavigate();
     const location = useLocation();
-
-
+    const [isLoading, setIsLoading] = useState(true);
+    const handleImageLoad = () => {
+        setIsLoading(false); 
+    };
     const handleAddToCart = item => {
-        console.log(item);
+       
         if (user && user.email) {
             const cartItem = { menuItemId: _id, name, image, price, email: user.email }
             fetch('https://bist-server-project-devloper-solaiman.vercel.app/carts', {
@@ -55,7 +57,19 @@ const FoodCard = ({ item }) => {
     }
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
-            <figure><img src={image} alt="Shoes" /></figure>
+            <figure>
+                
+                {isLoading && (
+                    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-gray-500">
+                        <div className="loader">Loading...</div> 
+                    </div>
+                )}
+                <img
+                    src={image}
+                    alt="Shoes"
+                    onLoad={handleImageLoad}
+                />
+            </figure>
             <p className="absolute right-0 mr-4 mt-4 px-4 bg-slate-900 text-white">${price}</p>
             <div className="card-body flex flex-col items-center">
                 <h2 className="card-title">{name}</h2>
